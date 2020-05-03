@@ -1,0 +1,33 @@
+{
+  "name": "fp-ts-react-hooks",
+  "main": "./target/index.js",
+  "typings": "./target/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oliverjash/fp-ts-react-hooks.git"
+  },
+  "version": "0.0.0",
+  "scripts": {
+    "compile": "rm -rf ./target/ && tsc",
+    "test": "npm run compile && node --require source-map-support/register ./target/tests.js",
+    "format": "prettier --write './**/*.{ts,tsx,js,json,md}' '.prettierrc'",
+    "prepublishOnly": "npm run test && npm run compile"
+  },
+  "files": [
+    "target"
+  ],
+  "dependencies": {
+    "@types/react": "^16.9.34",
+    "fp-ts": "^2.5.4",
+    "io-ts": "^2.2.1",
+    "io-ts-types": "^0.5.6",
+    "react": "^16.13.1",
+    "use-custom-compare": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.3",
+    "prettier": "^2.0.1",
+    "source-map-support": "^0.5.16",
+    "typescript": "^3.8.3"
+  }
+}
