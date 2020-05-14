@@ -10,5 +10,15 @@ assert.strictEqual(eqDependency.equals(1, 2), false);
 assert.strictEqual(eqDependency.equals(O.some(1), O.some(1)), true);
 assert.strictEqual(eqDependency.equals(O.some(1), O.some(2)), false);
 
+// nested options
+assert.strictEqual(
+    eqDependency.equals(O.some(O.some(1)), O.some(O.some(1))),
+    true,
+);
+assert.strictEqual(
+    eqDependency.equals(O.some(O.some(1)), O.some(O.some(2))),
+    false,
+);
+
 // mixed
 assert.strictEqual(eqDependency.equals(O.some(1), 1), false);

@@ -14,13 +14,13 @@ const optionUnknownT = option(t.unknown);
 
 const eqStrict = fromEquals(strictEqual);
 
-const eqOptionStrict = O.getEq(eqStrict);
-
 export const eqDependency: Eq<unknown> = fromEquals((a, b) =>
     optionUnknownT.is(a) && optionUnknownT.is(b)
-        ? eqOptionStrict.equals(a, b)
+        ? eqOptionDependency.equals(a, b)
         : eqStrict.equals(a, b),
 );
+
+const eqOptionDependency = O.getEq(eqDependency);
 
 const eqDependencies = ReadonlyArray.getEq(eqDependency);
 
