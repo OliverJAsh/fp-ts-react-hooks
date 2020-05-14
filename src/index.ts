@@ -17,20 +17,20 @@ const optionUnknownT = option(t.unknown);
 
 const eqStrict = fromEquals(strictEqual);
 
-export const eqDependency: Eq<unknown> = fromEquals((a, b) =>
+export const eq: Eq<unknown> = fromEquals((a, b) =>
     optionUnknownT.is(a) && optionUnknownT.is(b)
-        ? eqOptionDependency.equals(a, b)
+        ? eqOption.equals(a, b)
         : Array.isArray(a) && Array.isArray(b)
-        ? eqArrayDependency.equals(a, b)
+        ? eqArray.equals(a, b)
         : eqStrict.equals(a, b),
 );
 
-const eqOptionDependency = O.getEq(eqDependency);
-const eqArrayDependency = A.getEq(eqDependency);
+const eqOption = O.getEq(eq);
+const eqArray = A.getEq(eq);
 
-const eqDependencies = ReadonlyArray.getEq(eqDependency);
+const eqDependencies = ReadonlyArray.getEq(eq);
 
-const eqProps = Record.getEq(eqDependency);
+const eqProps = Record.getEq(eq);
 
 export const useCallback: typeof React.useCallback = (fn, dependencies) =>
     useCustomCompareCallback(fn, dependencies ?? [], eqDependencies.equals);
@@ -47,5 +47,5 @@ export const memo = <P extends object>(
 
 export const createSelector = reselect.createSelectorCreator(
     reselect.defaultMemoize,
-    eqDependency.equals,
+    eq.equals,
 );
