@@ -18,10 +18,12 @@
   ],
   "dependencies": {
     "@types/react": "^16.9.34",
+    "@types/reselect": "^2.2.0",
     "fp-ts": "^2.5.4",
     "io-ts": "^2.2.1",
     "io-ts-types": "^0.5.6",
     "react": "^16.13.1",
+    "reselect": "^4.0.0",
     "use-custom-compare": "^1.0.1"
   },
   "devDependencies": {
