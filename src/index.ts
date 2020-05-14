@@ -1,3 +1,4 @@
+import * as A from 'fp-ts/lib/Array';
 import { Eq, fromEquals, strictEqual } from 'fp-ts/lib/Eq';
 import * as O from 'fp-ts/lib/Option';
 import * as ReadonlyArray from 'fp-ts/lib/ReadonlyArray';
@@ -17,10 +18,13 @@ const eqStrict = fromEquals(strictEqual);
 export const eqDependency: Eq<unknown> = fromEquals((a, b) =>
     optionUnknownT.is(a) && optionUnknownT.is(b)
         ? eqOptionDependency.equals(a, b)
+        : Array.isArray(a) && Array.isArray(b)
+        ? eqArrayDependency.equals(a, b)
         : eqStrict.equals(a, b),
 );
 
 const eqOptionDependency = O.getEq(eqDependency);
+const eqArrayDependency = A.getEq(eqDependency);
 
 const eqDependencies = ReadonlyArray.getEq(eqDependency);
 
