@@ -41,9 +41,8 @@ export const useEffect: typeof React.useEffect = (fn, dependencies) =>
 export const useMemo: typeof React.useMemo = (fn, dependencies) =>
     useCustomCompareMemo(fn, dependencies ?? [], eqDependencies.equals);
 
-export const memo = <P extends object>(
-    Component: React.FC<P>,
-): React.NamedExoticComponent<P> => React.memo(Component, eqProps.equals);
+export const memo = <P extends object>(Component: React.FC<P>) =>
+    React.memo(Component, eqProps.equals);
 
 export const createSelector = reselect.createSelectorCreator(
     reselect.defaultMemoize,
